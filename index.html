@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Вступ до CSS</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#5d6679;--ac:#3b5bdb;--ok:#2b8a3e;--okb:#e6f4ea;--er:#c92a2a;--erb:#fdeaea;--bd:#dde1ea;--code:#1e2230;--codetx:#e8ecf7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12141b;--card:#1b1f2a;--tx:#e8ecf7;--mu:#a0a8bb;--ac:#7c93ff;--ok:#6fcf86;--okb:#17301f;--er:#ff8787;--erb:#3a1d1d;--bd:#2c3242;--code:#0d0f15}}
+:root[data-theme="dark"]{--bg:#12141b;--card:#1b1f2a;--tx:#e8ecf7;--mu:#a0a8bb;--ac:#7c93ff;--ok:#6fcf86;--okb:#17301f;--er:#ff8787;--erb:#3a1d1d;--bd:#2c3242;--code:#0d0f15}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:820px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.2rem 0 .8rem}h2{font-size:1.25rem;margin:1.2rem 0 .4rem}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+nav button{flex:1;min-width:110px;padding:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font:inherit;cursor:pointer}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+section{display:none;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px}
+section.on{display:block}
+code,pre,textarea{font-family:ui-monospace,Menlo,Consolas,monospace}
+code{background:var(--bd);padding:1px 5px;border-radius:5px;font-size:.9em}
+pre{background:var(--code);color:var(--codetx);padding:12px;border-radius:10px;overflow-x:auto;margin:.5rem 0;font-size:.9rem}
+.box{border-left:4px solid var(--ac);background:var(--bg);padding:10px 14px;border-radius:8px;margin:.8rem 0}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--bd);padding:8px;vertical-align:top;text-align:left;font-size:.92rem}
+.tw{overflow-x:auto}
+textarea{width:100%;min-height:110px;background:var(--code);color:var(--codetx);border:1px solid var(--bd);border-radius:10px;padding:10px;font-size:.9rem}
+iframe{width:100%;height:110px;border:1px dashed var(--bd);border-radius:10px;background:#fff}
+.btn{background:var(--ac);color:#fff;border:0;padding:10px 18px;border-radius:10px;font:inherit;cursor:pointer;margin:6px 6px 6px 0}
+.btn.s{background:var(--bd);color:var(--tx)}
+.fb{margin-top:6px;padding:8px 12px;border-radius:8px;display:none}
+.fb.ok{display:block;background:var(--okb);color:var(--ok)}.fb.no{display:block;background:var(--erb);color:var(--er)}
+.task{border:1px solid var(--bd);border-radius:12px;padding:14px;margin:12px 0}
+.q{border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin:10px 0}
+.q label{display:block;padding:6px 8px;border-radius:8px;cursor:pointer}
+.q label:hover{background:var(--bg)}
+.q.right{border-color:var(--ok)}.q.wrong{border-color:var(--er)}
+.ex{font-size:.9rem;color:var(--mu);margin-top:6px}
+.big{font-size:3rem;font-weight:700;color:var(--ac);text-align:center;margin:.3rem 0}
+select{font:inherit;padding:6px;border-radius:8px;background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin-bottom:12px}.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+</style></head><body><div class="w">
+<h1>🎨 Вступ до CSS</h1>
+<nav id="nav"><button class="on" data-t="0">1. Теорія</button><button data-t="1">2. Тренажер</button><button data-t="2">3. Тест</button><button data-t="3">4. Оцінка</button></nav>
+
+<section id="s0" class="on">
+<h2>1. Поняття CSS та каскадності</h2>
+<p><b>CSS</b> (<i>Cascading Style Sheets</i> — каскадні таблиці стилів) — спеціальна мова для опису зовнішнього вигляду та форматування веб-сторінок, написаних мовою розмітки.</p>
+<div class="box"><b>Головна ідея:</b> HTML відповідає за зміст і логічну структуру документа, а CSS — за його візуальне оформлення та позиціонування елементів.</div>
+<p><b>Каскадність</b> означає, що до одного елемента може застосовуватися кілька правил із різних джерел. У разі конфлікту браузер застосує їх «каскадом» відповідно до системи пріоритетів.</p>
+
+<h2>2. Синтаксис CSS-правила</h2>
+<p>Правило складається з <b>селектора</b> (вказує, до якого елемента застосовується стиль) та <b>блоку оголошень</b> у фігурних дужках <code>{ ... }</code>, де через крапку з комою перелічуються пари <code>властивість: значення;</code></p>
+<pre>p {
+    font-size: 20pt;
+    color: green;
+    font-family: Arial, sans-serif;
+}</pre>
+<p>Коментарі у CSS записуються між символами <code>/*</code> та <code>*/</code>.</p>
+
+<h2>3. Способи підключення CSS до HTML</h2>
+<div class="tw"><table>
+<tr><th>Спосіб</th><th>Синтаксис і місце</th><th>Особливості</th></tr>
+<tr><td><b>1. Вбудований стиль</b> (Inline Styles)</td><td>Безпосередньо у відкриваючому тегу, атрибут <code>style</code>:<pre>&lt;p style="color: red; font-size: 18px;"&gt;Текст&lt;/p&gt;</pre></td><td>Найвищий пріоритет. Лише як виняток для точкового оформлення одного унікального елемента. Змішує вміст і дизайн, ускладнює редагування.</td></tr>
+<tr><td><b>2. Внутрішня таблиця стилів</b> (Embedded)</td><td>У розділі <code>&lt;head&gt;</code> всередині парного тегу <code>&lt;style&gt; ... &lt;/style&gt;</code>.</td><td>Діє лише в межах однієї сторінки. Зручно для односторінкових сайтів або тестування макета.</td></tr>
+<tr><td><b>3. Зовнішня таблиця стилів</b> (External)</td><td>Окремий файл з розширенням <code>.css</code>, підключається в <code>&lt;head&gt;</code> тегом <code>&lt;link&gt;</code>:<pre>&lt;link rel="stylesheet"
+ href="css/style.css"&gt;</pre></td><td>Найпоширеніший і рекомендований стандарт. Один CSS-файл керує дизайном десятків сторінок одночасно, пришвидшує завантаження й спрощує підтримку коду.</td></tr>
+</table></div>
+<p class="ex">Додатково: директива <code>@import url("style.css");</code> всередині тегу <code>&lt;style&gt;</code> використовується рідше через уповільнення завантаження сторінки.</p>
+
+<h2>4. Базова пріоритетність (каскад)</h2>
+<p>Якщо до одного елемента задано суперечливі стилі, діє правило пріоритетів (від найвищого до найнижчого):</p>
+<ol><li>Вбудовані стилі (атрибут <code>style</code> у тезі).</li><li>Внутрішні та зовнішні таблиці стилів (перемагає правило, яке підключене або записане в коді <b>нижче</b>).</li><li>Стилі браузера за замовчуванням.</li></ol>
+<button class="btn" onclick="go(1)">Перейти до тренажера →</button>
+</section>
+
+<section id="s1">
+<h2>Практичний тренажер</h2>
+<p>Виконуй завдання. Кожне — до <b>2 балів</b>: 2 — з першої спроби без підказки, 1 — після помилок або з підказкою, 0 — не виконано. Разом до <b>8 балів</b>.</p>
+<div class="bar"><i id="pb"></i></div><p id="tp"><b>Бали за тренажер: 0 / 8</b></p>
+
+<div class="task"><b>Завдання 1.</b> Напиши CSS-правило для абзацу <code>p</code>: колір <code>green</code>, розмір шрифту <code>20pt</code>.
+<textarea id="c1" spellcheck="false">p {
+    
+}</textarea><iframe id="p1" sandbox></iframe>
+<button class="btn" onclick="chk(1)">Перевірити</button><button class="btn s" onclick="hint(1)">Підказка</button><div class="fb" id="f1"></div></div>
+
+<div class="task"><b>Завдання 2.</b> Зроби текст абзацу червоним за допомогою <b>вбудованого стилю</b> (атрибут <code>style</code>).
+<textarea id="c2" spellcheck="false">&lt;p&gt;Привіт, CSS!&lt;/p&gt;</textarea><iframe id="p2" sandbox></iframe>
+<button class="btn" onclick="chk(2)">Перевірити</button><button class="btn s" onclick="hint(2)">Підказка</button><div class="fb" id="f2"></div></div>
+
+<div class="task"><b>Завдання 3.</b> Підключи зовнішній файл <code>style.css</code> у розділі <code>head</code>.
+<textarea id="c3" spellcheck="false">&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    
+&lt;/head&gt;</textarea>
+<button class="btn" onclick="chk(3)">Перевірити</button><button class="btn s" onclick="hint(3)">Підказка</button><div class="fb" id="f3"></div></div>
+
+<div class="task"><b>Завдання 4.</b> Розстав пріоритети від найвищого (1) до найнижчого (3):
+<p>Стилі браузера за замовчуванням: <select class="pr" data-a="3"><option value="">—</option><option>1</option><option>2</option><option>3</option></select><br>
+Вбудований стиль (<code>style</code>): <select class="pr" data-a="1"><option value="">—</option><option>1</option><option>2</option><option>3</option></select><br>
+Внутрішня/зовнішня таблиця стилів: <select class="pr" data-a="2"><option value="">—</option><option>1</option><option>2</option><option>3</option></select></p>
+<button class="btn" onclick="chk(4)">Перевірити</button><div class="fb" id="f4"></div></div>
+<button class="btn" onclick="go(2)">Перейти до тесту →</button>
+</section>
+
+<section id="s2">
+<h2>Тест (8 питань)</h2><p>Кожна правильна відповідь — 1 бал, разом до <b>8 балів</b>.</p>
+<div id="qs"></div>
+<button class="btn" onclick="submitT()">Завершити тест</button>
+<div class="fb" id="tf"></div>
+</section>
+
+<section id="s3">
+<h2>Оцінка</h2>
+<div id="res"><p>Спочатку пройди тест.</p></div>
+</section>
+</div>
+<script>
+var $=function(i){return document.getElementById(i)};
+function go(n){document.querySelectorAll('section').forEach(function(s,i){s.classList.toggle('on',i===n)});document.querySelectorAll('nav button').forEach(function(b,i){b.classList.toggle('on',i===n)});window.scrollTo(0,0)}
+document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){go(+b.dataset.t)}});
+function un(s){var d=document.createElement('textarea');d.innerHTML=s;return d.value}
+function prev(){$('p1').srcdoc='<style>'+$('c1').value+'</style><p>Привіт, CSS!</p>';$('p2').srcdoc=un($('c2').value)}
+['c1','c2'].forEach(function(i){$(i).oninput=prev});
+$('c2').value='<p>Привіт, CSS!</p>';$('c3').value='<head>\n    <meta charset="utf-8">\n    \n</head>';prev();
+var done={},wr={},hn={};
+function pts(n){return done[n]?((wr[n]||hn[n])?1:2):0}
+function tp(){var s=0;for(var i=1;i<=4;i++)s+=pts(i);return s}
+function fb(n,ok,msg){var f=$('f'+n);if(!done[n]){if(ok)done[n]=1;else wr[n]=1}f.className='fb '+(ok?'ok':'no');f.textContent=msg+(ok?' (+'+pts(n)+' б.)':'');$('pb').style.width=tp()/8*100+'%';$('tp').innerHTML='<b>Бали за тренажер: '+tp()+' / 8</b>';renderRes()}
+function renderRes(){if(window.ts==null)return;var t=tp(),sc=window.ts,tot=t+sc,g=Math.max(1,Math.round(tot/16*12)),m=g>=10?'Відмінний результат! 🎉':g>=7?'Добре! Перегляньте питання з помилками.':g>=4?'Непогано, але варто повторити теорію.':'Потрібно повторити теорію й тренажер.';
+$('res').innerHTML='<div class="tw"><table><tr><th>Частина</th><th>Бали</th></tr><tr><td>Практичний тренажер</td><td>'+t+' / 8</td></tr><tr><td>Тест</td><td>'+sc+' / 8</td></tr><tr><td><b>Разом</b></td><td><b>'+tot+' / 16</b></td></tr></table></div><p style="text-align:center;margin-bottom:0">Оцінка за 12-бальною шкалою</p><div class="big">'+g+' / 12</div><p class="ex" style="text-align:center">Формула: сума балів ÷ 16 × 12, округлено до цілого (мінімум 1).</p><p style="text-align:center">'+m+'</p>'+(window.miss.length?'<p>Повтори питання тесту: '+window.miss.join(', ')+'.</p>':'')+(t<8?'<p>Тренажер: можна повернутися й виправити завдання — бали оновляться.</p>':'')+'<button class="btn" onclick="go(0)">Повторити теорію</button><button class="btn s" onclick="retry()">Пройти тест знову</button>'}
+function chk(n){var v;
+if(n==1){v=$('c1').value;var ok=/p\s*\{[^}]*color\s*:\s*green\s*;/i.test(v)&&/font-size\s*:\s*20pt\s*;/i.test(v);fb(1,ok,ok?'✅ Чудово! Правило записано правильно.':'❌ Перевір: селектор p, фігурні дужки, пари «властивість: значення;».')}
+if(n==2){v=un($('c2').value);var ok=/<p[^>]*style\s*=\s*["'][^"']*color\s*:\s*red/i.test(v);fb(2,ok,ok?'✅ Вірно! Вбудований стиль має найвищий пріоритет.':'❌ Атрибут style пишеться у відкриваючому тегу: style="color: red;"')}
+if(n==3){v=$('c3').value;var ok=/<link/i.test(v)&&/rel\s*=\s*["']stylesheet["']/i.test(v)&&/href\s*=\s*["']([^"']*\/)?style\.css["']/i.test(v);fb(3,ok,ok?'✅ Супер! Зовнішня таблиця підключена.':'❌ Потрібен тег link з rel="stylesheet" та href="style.css".')}
+if(n==4){var s=document.querySelectorAll('.pr'),ok=true;s.forEach(function(x){if(x.value!==x.dataset.a)ok=false});fb(4,ok,ok?'✅ Правильно: style → таблиці стилів → браузер.':'❌ Спробуй ще: найвищий пріоритет у вбудованого стилю.')}}
+function hint(n){if(!done[n])hn[n]=1;var h={1:'p { color: green; font-size: 20pt; }',2:'<p style="color: red;">Привіт, CSS!</p>',3:'<link rel="stylesheet" href="style.css">'};var f=$('f'+n);f.className='fb no';f.textContent='💡 '+h[n]}
+
+var Q=[
+["Що означає абревіатура CSS?",["Computer Style Sheets","Cascading Style Sheets","Creative Style System","Colorful Site Styles"],1,"CSS — Cascading Style Sheets, каскадні таблиці стилів."],
+["Як у CSS записуються коментарі?",["// коментар","<!-- коментар -->","/* коментар */","# коментар"],2,"Коментарі у CSS пишуться між /* та */."],
+["З яких частин складається CSS-правило?",["Із тегу та атрибута","Із селектора та блоку оголошень","Із заголовка та тіла","Із селектора та скрипта"],1,"Селектор вказує елемент, а блок оголошень {…} містить пари властивість: значення;"],
+["Який запис CSS є правильним?",["p { color: green; }","p ( color = green )","p { color = green }","<p> color: green </p>"],0,"Властивість і значення розділяються двокрапкою, оголошення завершується крапкою з комою."],
+["Який спосіб підключення має найвищий пріоритет?",["Зовнішня таблиця стилів","Внутрішня таблиця стилів","Вбудований стиль (style)","Стилі браузера"],2,"Вбудовані стилі в атрибуті style мають найвищий пріоритет."],
+["Яким тегом підключається зовнішній CSS-файл?",["<style>","<css>","<script>","<link>"],3,"Тег <link rel=\"stylesheet\" href=\"…\"> розміщують у <head>."],
+["У якому розділі HTML розміщується тег <style>?",["<body>","<head>","<footer>","Будь-де після </html>"],1,"Внутрішня таблиця стилів пишеться в <head> усередині <style>…</style>."],
+["Який спосіб підключення вважається рекомендованим стандартом?",["Вбудований стиль","Внутрішня таблиця","Зовнішня таблиця стилів","@import у кожному абзаці"],2,"Один .css-файл керує багатьма сторінками, пришвидшує завантаження й спрощує підтримку."]];
+var qh='';Q.forEach(function(q,i){qh+='<div class="q" id="q'+i+'"><b>'+(i+1)+'. '+q[0].replace(/</g,'&lt;')+'</b>';q[1].forEach(function(o,j){qh+='<label><input type="radio" name="r'+i+'" value="'+j+'"> '+o.replace(/</g,'&lt;')+'</label>'});qh+='<div class="ex" id="e'+i+'"></div></div>'});$('qs').innerHTML=qh;
+function submitT(){var sc=0,miss=[];Q.forEach(function(q,i){var c=document.querySelector('input[name=r'+i+']:checked');var el=$('q'+i),ok=c&&+c.value===q[2];el.className='q '+(ok?'right':'wrong');$('e'+i).textContent=(ok?'✅ ':'❌ ')+q[3];if(ok)sc++;else miss.push(i+1)});
+window.ts=sc;window.miss=miss;
+renderRes();
+$('tf').className='fb ok';$('tf').textContent='Тест завершено: '+sc+' з 8. Дивись вкладку «Оцінка».';go(3)}
+function retry(){document.querySelectorAll('#qs input').forEach(function(i){i.checked=false});Q.forEach(function(q,i){$('q'+i).className='q';$('e'+i).textContent=''});$('tf').className='fb';window.ts=null;$('res').innerHTML='<p>Спочатку пройди тест.</p>';go(2)}
+</script></body></html>
